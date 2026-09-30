@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KARTIK SAINI — Portfolio & Brand Identity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f4ff',
+                            100: '#e0e9ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            accent: '#06b6d4',
+                            purple: '#8b5cf6',
+                            glow: '#60a5fa'
+                        },
+                        darkbg: '#0b0f19',
+                        darkcard: '#111827',
+                        lightbg: '#f8fafc',
+                        lightcard: '#ffffff'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        glow: {
+                            '0%': { filter: 'drop-shadow(0 0 10px rgba(59, 130, 246, 0.4))' },
+                            '100%': { filter: 'drop-shadow(0 0 25px rgba(6, 182, 212, 0.8))' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #06b6d4 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-border {
+            position: relative;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.5), rgba(6, 182, 212, 0.5));
+            padding: 1px;
+        }
+
+        .gradient-border-inner {
+            background: #0b0f19;
+            border-radius: calc(0.75rem - 1px);
+        }
+
+        .light .gradient-border-inner {
+            background: #ffffff;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        .light ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        .light ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+
+        /* Ambient Canvas Background */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-slate-100 dark:bg-darkbg dark:text-slate-100 light:bg-lightbg light:text-slate-800 transition-colors duration-300 relative overflow-x-hidden selection:bg-brand-500 selection:text-white">
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-card border-b border-white/10 dark:border-white/10 light:border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo Header -->
+            <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
+                <div class="w-10 h-10 transition-transform duration-300 group-hover:scale-110">
+                    <svg viewBox="0 0 200 200" class="w-full h-full filter drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]">
+                        <defs>
+                            <linearGradient id="headerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#3b82f6"/>
+                                <stop offset="50%" stop-color="#06b6d4"/>
+                                <stop offset="100%" stop-color="#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Stylized KS Logo Outline -->
+                        <polygon points="40,20 100,20 70,180 10,180" fill="url(#headerLogoGrad)" opacity="0.15"/>
+                        <path d="M 40,20 L 75,20 L 75,90 L 125,20 L 165,20 L 105,100 L 175,180 L 130,180 L 75,110 L 75,180 L 40,180 Z" fill="url(#headerLogoGrad)"/>
+                        <circle cx="145" cy="55" r="8" fill="#06b6d4" class="animate-pulse"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg tracking-wider text-slate-100 dark:text-white light:text-slate-900 font-mono">KARTIK<span class="text-brand-500">.</span>SAINI</span>
+                    <span class="text-[10px] tracking-widest text-slate-400 font-mono uppercase -mt-1">Creative Tech Lead</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300 dark:text-slate-300 light:text-slate-600">
+                <a href="#about" class="hover:text-brand-500 transition-colors">About</a>
+                <a href="#projects" class="hover:text-brand-500 transition-colors">Projects</a>
+                <a href="#brand" class="hover:text-brand-500 transition-colors">Brand Guidelines</a>
+                <a href="#contact" class="hover:text-brand-500 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions Right -->
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2.5 rounded-full bg-slate-800/80 dark:bg-slate-800/80 light:bg-slate-200/80 text-amber-400 dark:text-amber-400 light:text-slate-700 hover:ring-2 hover:ring-brand-500 transition-all focus:outline-none" aria-label="Toggle Theme">
+                    <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+
+                <!-- CTA Button -->
+                <a href="#contact" class="hidden sm:inline-flex items-center px-4 py-2 text-xs font-semibold tracking-wider text-white uppercase transition-all duration-300 rounded-lg bg-gradient-to-r from-brand-600 to-brand-accent hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-105 active:scale-95">
+                    Get in Touch
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-300 dark:text-slate-300 light:text-slate-700 hover:text-white focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-card border-b border-white/10 px-4 pt-2 pb-6 space-y-3 text-center">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand-500">About</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand-500">Projects</a>
+            <a href="#brand" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand-500">Brand Guidelines</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-300 hover:text-brand-500">Contact</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="inline-block mt-2 px-6 py-2.5 text-xs font-semibold tracking-wider text-white uppercase rounded-lg bg-gradient-to-r from-brand-600 to-brand-accent">
+                Get in Touch
+            </a>
+        </div>
+    </header>
+
+    <section id="hero" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Headline Text -->
+            <div class="lg:col-span-7 text-left space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 dark:text-brand-400 light:text-brand-600 text-xs font-mono tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>AVAILABLE FOR FREELANCE & INNOVATION PROJECTS</span>
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight text-slate-100 dark:text-white light:text-slate-900">
+                    Architecting <br>
+                    <span class="gradient-text">Digital Excellence.</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-slate-400 dark:text-slate-400 light:text-slate-600 max-w-2xl font-light leading-relaxed">
+                    Hello, I'm <strong class="text-slate-200 dark:text-slate-200 light:text-slate-800 font-semibold">Kartik Saini</strong> — A Senior Full-Stack Engineer, Creative Technologist, and UI/UX Designer dedicated to forging high-performance digital experiences and iconic brand identities.
+                </p>
+
+                <!-- Hero Action Buttons -->
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#projects" class="px-8 py-3.5 text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-brand-600 via-brand-500 to-brand-accent hover:shadow-[0_0_25px_rgba(59,130,246,0.6)] transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2">
+                        <span>View Featured Work</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="#brand" class="px-8 py-3.5 text-sm font-semibold rounded-xl text-slate-300 dark:text-slate-300 light:text-slate-700 bg-slate-800/60 dark:bg-slate-800/60 light:bg-slate-200/80 border border-slate-700/60 dark:border-slate-700/60 light:border-slate-300/80 hover:bg-slate-700/60 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-vector-square text-brand-400"></i>
+                        <span>Explore Brand ID</span>
+                    </a>
+                </div>
+
+                <!-- Quick Metrics Badge -->
+                <div class="pt-8 border-t border-slate-800 dark:border-slate-800 light:border-slate-200 grid grid-cols-3 gap-6 text-left">
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold font-mono text-white dark:text-white light:text-slate-900">7+</div>
+                        <div class="text-xs text-slate-400 font-sans mt-1">Years Experience</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold font-mono text-white dark:text-white light:text-slate-900">45+</div>
+                        <div class="text-xs text-slate-400 font-sans mt-1">Projects Delivered</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl sm:text-3xl font-bold font-mono text-white dark:text-white light:text-slate-900">100%</div>
+                        <div class="text-xs text-slate-400 font-sans mt-1">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Interactive Monogram Hero Showcase -->
+            <div class="lg:col-span-5 flex justify-center items-center relative">
+                <!-- Glowing Ambient Backdrop -->
+                <div class="absolute w-72 h-72 sm:w-96 sm:h-96 bg-gradient-to-tr from-brand-600/30 to-brand-accent/30 rounded-full filter blur-3xl animate-pulse-slow"></div>
+                
+                <div class="relative glass-card p-8 rounded-3xl border border-white/20 dark:border-white/20 light:border-slate-300 shadow-2xl flex flex-col items-center text-center animate-float group">
+                    
+                    <!-- Large Vector SVG Brand Logo -->
+                    <div class="w-64 h-64 sm:w-80 sm:h-80 relative flex items-center justify-center p-4">
+                        <svg viewBox="0 0 300 300" class="w-full h-full filter drop-shadow-[0_0_20px_rgba(59,130,246,0.6)] transition-all duration-500 group-hover:scale-105">
+                            <defs>
+                                <linearGradient id="heroLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#60a5fa"/>
+                                    <stop offset="50%" stop-color="#06b6d4"/>
+                                    <stop offset="100%" stop-color="#8b5cf6"/>
+                                </linearGradient>
+                                <linearGradient id="glowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8"/>
+                                    <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.2"/>
+                                </linearGradient>
+                            </defs>
+                            
+                            <!-- Outer Hexagonal Geometric Ring -->
+                            <polygon points="150,15 260,80 260,220 150,285 40,220 40,80" fill="none" stroke="url(#heroLogoGrad)" stroke-width="2" stroke-dasharray="8 6" opacity="0.4" class="animate-spin" style="animation-duration: 30s; transform-origin: center;"/>
+                            
+                            <!-- Inner Hexagon Backdrop -->
+                            <polygon points="150,30 245,85 245,215 150,270 55,215 55,85" fill="rgba(15,23,42,0.6)" stroke="url(#heroLogoGrad)" stroke-width="3" opacity="0.8"/>
+
+                            <!-- Main Monogram 'K' and 'S' Intertwined Geometry -->
+                            <!-- Stem of K -->
+                            <path d="M 90,65 L 125,65 L 125,235 L 90,235 Z" fill="url(#heroLogoGrad)"/>
+                            
+                            <!-- Upper Arm of K -->
+                            <path d="M 125,145 L 195,65 L 235,65 L 155,155 Z" fill="url(#heroLogoGrad)"/>
+                            
+                            <!-- Interlocking S Sweeping Arc / Lower Arm -->
+                            <path d="M 125,155 L 210,235 L 245,235 L 175,165 Z" fill="url(#heroLogoGrad)"/>
+                            <path d="M 175,165 L 235,165 C 245,165 250,175 250,190 C 250,215 220,235 180,235 L 170,215 C 200,215 225,200 225,190 C 225,182 215,180 200,180 L 160,180 Z" fill="#06b6d4"/>
+
+                            <!-- Cyberpunk Accent Nodes -->
+                            <circle cx="215" cy="65" r="6" fill="#60a5fa" class="animate-ping"/>
+                            <circle cx="215" cy="65" r="4" fill="#ffffff"/>
+                            <circle cx="90" cy="235" r="4" fill="#8b5cf6"/>
+                        </svg>
+                    </div>
+
+                    <div class="mt-2 font-mono text-xs tracking-widest text-slate-400 dark:text-slate-400 light:text-slate-600 uppercase">
+                        Official Brand Mark • V2.5
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about" class="py-24 relative z-10 border-t border-slate-800/80 dark:border-slate-800/80 light:border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500 mb-2">Architecting The Future</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white dark:text-white light:text-slate-900">About Kartik Saini</h3>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Bio Card -->
+                <div class="lg:col-span-7 glass-card p-8 sm:p-10 rounded-2xl space-y-6">
+                    <h4 class="text-2xl font-bold text-white dark:text-white light:text-slate-900">
+                        Synthesizing engineering precision with aesthetic vision.
+                    </h4>
+                    <p class="text-slate-300 dark:text-slate-300 light:text-slate-600 leading-relaxed">
+                        With over 7 years in tech and digital product design, I bridge the gap between robust software engineering and compelling brand storytelling. My philosophy centers around minimalism, hyper-responsiveness, and user-first architecture.
+                    </p>
+                    <p class="text-slate-300 dark:text-slate-300 light:text-slate-600 leading-relaxed">
+                        Whether building high-concurrency cloud systems or sculpting sleek design languages, I ensure every digital touchpoint reflects excellence and purpose.
+                    </p>
+
+                    <!-- Core Competencies Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                        <div class="p-3 bg-slate-800/50 dark:bg-slate-800/50 light:bg-slate-100 rounded-xl border border-slate-700/50 dark:border-slate-700/50 light:border-slate-200">
+                            <i class="fa-solid fa-code text-brand-400 mb-2 text-lg"></i>
+                            <div class="text-xs font-semibold text-white dark:text-white light:text-slate-800">Full-Stack Dev</div>
+                            <div class="text-[10px] text-slate-400">React, Node, Go, TS</div>
+                        </div>
+                        <div class="p-3 bg-slate-800/50 dark:bg-slate-800/50 light:bg-slate-100 rounded-xl border border-slate-700/50 dark:border-slate-700/50 light:border-slate-200">
+                            <i class="fa-solid fa-wand-magic-sparkles text-brand-accent mb-2 text-lg"></i>
+                            <div class="text-xs font-semibold text-white dark:text-white light:text-slate-800">UI/UX & Identity</div>
+                            <div class="text-[10px] text-slate-400">Figma, Design Systems</div>
+                        </div>
+                        <div class="p-3 bg-slate-800/50 dark:bg-slate-800/50 light:bg-slate-100 rounded-xl border border-slate-700/50 dark:border-slate-700/50 light:border-slate-200">
+                            <i class="fa-solid fa-cloud-bolt text-purple-400 mb-2 text-lg"></i>
+                            <div class="text-xs font-semibold text-white dark:text-white light:text-slate-800">Cloud & Ops</div>
+                            <div class="text-[10px] text-slate-400">AWS, Docker, CI/CD</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Skills & Philosophy Stack -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-6 rounded-2xl border border-white/10">
+                        <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900 mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-simple text-brand-500"></i> Core Skills Matrix
+                        </h4>
+                        
+                        <!-- Skill Bars -->
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1 text-slate-300">
+                                    <span>Frontend Engineering (React / Vue / Tailwind)</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-brand-600 to-brand-accent w-[95%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1 text-slate-300">
+                                    <span>Backend Systems & Microservices</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-brand-600 to-purple-500 w-[90%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-mono mb-1 text-slate-300">
+                                    <span>Brand Architecture & Vector Graphics</span>
+                                    <span>88%</span>
+                                </div>
+                                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-brand-accent to-emerald-400 w-[88%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote / Philosophy Box -->
+                    <div class="p-6 rounded-2xl bg-gradient-to-br from-brand-900/30 to-slate-900 border border-brand-500/20 relative">
+                        <i class="fa-solid fa-quote-left text-3xl text-brand-500/30 absolute top-4 left-4"></i>
+                        <p class="text-sm text-slate-300 italic relative z-10 pl-6">
+                            "Simplicity isn't the lack of complexity; it's the mastery of it. Great products speak for themselves through intuitive craft."
+                        </p>
+                        <div class="mt-3 text-right font-mono text-xs text-brand-400 font-semibold">— Kartik Saini</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 relative z-10 bg-slate-900/40 dark:bg-slate-900/40 light:bg-slate-100/60 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500 mb-2">Curated Portfolio</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white dark:text-white light:text-slate-900">Featured Projects</h3>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Category Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="filterProjects('all')" class="filter-btn active-filter px-5 py-2 text-xs font-semibold rounded-full border border-brand-500 bg-brand-500 text-white transition-all shadow-lg" data-filter="all">
+                    All Work
+                </button>
+                <button onclick="filterProjects('web')" class="filter-btn px-5 py-2 text-xs font-semibold rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 hover:border-brand-500/50 transition-all" data-filter="web">
+                    Web Applications
+                </button>
+                <button onclick="filterProjects('branding')" class="filter-btn px-5 py-2 text-xs font-semibold rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 hover:border-brand-500/50 transition-all" data-filter="branding">
+                    Brand Identity
+                </button>
+                <button onclick="filterProjects('design')" class="filter-btn px-5 py-2 text-xs font-semibold rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 hover:border-brand-500/50 transition-all" data-filter="design">
+                    UI/UX Design
+                </button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 group hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="web">
+                    <div class="relative h-48 bg-slate-800 overflow-hidden">
+                        <img src="https://placehold.co/800x500/0f172a/60a5fa?text=NovaX+Fintech+Dashboard" alt="NovaX Fintech Platform" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/0f172a/60a5fa?text=Project+Preview'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 px-2.5 py-1 rounded-md text-[10px] font-mono bg-brand-500/80 text-white font-semibold">Web App</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xl font-bold text-white dark:text-white light:text-slate-900 group-hover:text-brand-400 transition-colors">NovaX Analytics Platform</h4>
+                            <p class="text-sm text-slate-400 mt-2 line-clamp-2">High-frequency real-time financial dashboard powered by React, WebSockets, and Tailwind CSS.</p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between border-t border-slate-800 pt-4">
+                            <div class="flex gap-2 text-xs text-slate-400 font-mono">
+                                <span>React</span> • <span>Node</span> • <span>D3.js</span>
+                            </div>
+                            <button onclick="openModal('NovaX Analytics Platform', 'NovaX is a enterprise-grade fintech dashboard built to render 50,000+ data points per second with under 15ms latency. Features custom charting with D3.js and responsive glassmorphic UI.', 'https://placehold.co/800x500/0f172a/60a5fa?text=NovaX+Fintech+Dashboard')" class="p-2 rounded-lg bg-brand-500/20 text-brand-400 hover:bg-brand-500 hover:text-white transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 group hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="branding">
+                    <div class="relative h-48 bg-slate-800 overflow-hidden">
+                        <img src="https://placehold.co/800x500/1e1b4b/818cf8?text=Aether+Brand+Identity" alt="Aether Identity" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/1e1b4b/818cf8?text=Brand+Identity'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 px-2.5 py-1 rounded-md text-[10px] font-mono bg-purple-500/80 text-white font-semibold">Branding</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xl font-bold text-white dark:text-white light:text-slate-900 group-hover:text-purple-400 transition-colors">Aether AI Identity System</h4>
+                            <p class="text-sm text-slate-400 mt-2 line-clamp-2">Complete geometric logo suite, typography hierarchy, and brand guidelines for AI startup.</p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between border-t border-slate-800 pt-4">
+                            <div class="flex gap-2 text-xs text-slate-400 font-mono">
+                                <span>Vector</span> • <span>Figma</span> • <span>Identity</span>
+                            </div>
+                            <button onclick="openModal('Aether AI Identity System', 'Comprehensive visual identity overhaul for Aether AI. Includes responsive SVG logos, design token variables, print guidelines, and UI component kit.', 'https://placehold.co/800x500/1e1b4b/818cf8?text=Aether+Brand+Identity')" class="p-2 rounded-lg bg-purple-500/20 text-purple-400 hover:bg-purple-500 hover:text-white transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden border border-white/10 group hover:border-brand-500/50 transition-all duration-300 flex flex-col" data-category="design">
+                    <div class="relative h-48 bg-slate-800 overflow-hidden">
+                        <img src="https://placehold.co/800x500/064e3b/34d399?text=CyberPulse+UI+Kit" alt="CyberPulse UI Kit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/064e3b/34d399?text=UI+Kit'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+                        <span class="absolute top-4 right-4 px-2.5 py-1 rounded-md text-[10px] font-mono bg-emerald-500/80 text-white font-semibold">UI/UX</span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-xl font-bold text-white dark:text-white light:text-slate-900 group-hover:text-emerald-400 transition-colors">CyberPulse Design System</h4>
+                            <p class="text-sm text-slate-400 mt-2 line-clamp-2">A futuristic dark-mode UI design system engineered for accessibility and ultra-fast design prototyping.</p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between border-t border-slate-800 pt-4">
+                            <div class="flex gap-2 text-xs text-slate-400 font-mono">
+                                <span>Figma</span> • <span>Tokens</span> • <span>WCAG 2.1</span>
+                            </div>
+                            <button onclick="openModal('CyberPulse Design System', 'CyberPulse is an end-to-end design system containing over 200+ accessible components, dark/light theme tokens, and custom motion guidelines.', 'https://placehold.co/800x500/064e3b/34d399?text=CyberPulse+UI+Kit')" class="p-2 rounded-lg bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-white transition-colors">
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="brand" class="py-24 relative z-10 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500 mb-2">Visual Standards</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white dark:text-white light:text-slate-900">Kartik Saini Brand Identity</h3>
+                <p class="text-slate-400 text-sm mt-2">Explore the official logo variations, color tokens, and typography specifications.</p>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Logo Variations Showcase Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                
+                <!-- Variation 1: Cyber Gradient Dark -->
+                <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center text-center space-y-4">
+                    <div class="w-28 h-28 flex items-center justify-center">
+                        <svg viewBox="0 0 200 200" class="w-full h-full">
+                            <defs>
+                                <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#3b82f6"/>
+                                    <stop offset="100%" stop-color="#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M 40,20 L 75,20 L 75,90 L 125,20 L 165,20 L 105,100 L 175,180 L 130,180 L 75,110 L 75,180 L 40,180 Z" fill="url(#g1)"/>
+                            <circle cx="145" cy="55" r="8" fill="#06b6d4"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-mono font-semibold text-white">01. Primary Electric</span>
+                    <span class="text-[10px] text-slate-500">Dark Background Usage</span>
+                </div>
+
+                <!-- Variation 2: Pure Monotone Light -->
+                <div class="p-6 rounded-2xl bg-white border border-slate-200 flex flex-col items-center text-center space-y-4 shadow-sm">
+                    <div class="w-28 h-28 flex items-center justify-center">
+                        <svg viewBox="0 0 200 200" class="w-full h-full">
+                            <path d="M 40,20 L 75,20 L 75,90 L 125,20 L 165,20 L 105,100 L 175,180 L 130,180 L 75,110 L 75,180 L 40,180 Z" fill="#0f172a"/>
+                            <circle cx="145" cy="55" r="8" fill="#2563eb"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-mono font-semibold text-slate-900">02. Monotone Dark</span>
+                    <span class="text-[10px] text-slate-400">Light Background / Print</span>
+                </div>
+
+                <!-- Variation 3: Neon Purple Gradient -->
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col items-center text-center space-y-4">
+                    <div class="w-28 h-28 flex items-center justify-center">
+                        <svg viewBox="0 0 200 200" class="w-full h-full">
+                            <defs>
+                                <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#a855f7"/>
+                                    <stop offset="100%" stop-color="#ec4899"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M 40,20 L 75,20 L 75,90 L 125,20 L 165,20 L 105,100 L 175,180 L 130,180 L 75,110 L 75,180 L 40,180 Z" fill="url(#g3)"/>
+                            <circle cx="145" cy="55" r="8" fill="#ec4899"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-mono font-semibold text-white">03. Synth Accent</span>
+                    <span class="text-[10px] text-slate-500">Special Campaigns</span>
+                </div>
+
+                <!-- Variation 4: Minimal Outline Wireframe -->
+                <div class="p-6 rounded-2xl bg-slate-950 border border-slate-800 flex flex-col items-center text-center space-y-4">
+                    <div class="w-28 h-28 flex items-center justify-center">
+                        <svg viewBox="0 0 200 200" class="w-full h-full">
+                            <path d="M 40,20 L 75,20 L 75,90 L 125,20 L 165,20 L 105,100 L 175,180 L 130,180 L 75,110 L 75,180 L 40,180 Z" fill="none" stroke="#60a5fa" stroke-width="4"/>
+                            <circle cx="145" cy="55" r="8" fill="#60a5fa"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-mono font-semibold text-white">04. Wireframe Stroke</span>
+                    <span class="text-[10px] text-slate-500">Technical / Blueprint</span>
+                </div>
+
+            </div>
+
+            <!-- Brand Color Palettes & Logo Download Area -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                
+                <!-- Color Swatches -->
+                <div class="lg:col-span-8 glass-card p-6 sm:p-8 rounded-2xl">
+                    <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900 mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-palette text-brand-500"></i> Color System Palette
+                    </h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="space-y-2">
+                            <div class="h-16 rounded-xl bg-blue-500 shadow-lg"></div>
+                            <div class="text-xs font-mono font-semibold text-white">#3B82F6</div>
+                            <div class="text-[10px] text-slate-400">Electric Blue (Primary)</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-16 rounded-xl bg-cyan-500 shadow-lg"></div>
+                            <div class="text-xs font-mono font-semibold text-white">#06B6D4</div>
+                            <div class="text-[10px] text-slate-400">Cyber Cyan (Accent)</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-16 rounded-xl bg-purple-600 shadow-lg"></div>
+                            <div class="text-xs font-mono font-semibold text-white">#8B5CF6</div>
+                            <div class="text-[10px] text-slate-400">Deep Violet (Secondary)</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-16 rounded-xl bg-slate-950 border border-slate-800 shadow-lg"></div>
+                            <div class="text-xs font-mono font-semibold text-white">#0B0F19</div>
+                            <div class="text-[10px] text-slate-400">Dark Canvas (Base)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Logo Assets Box -->
+                <div class="lg:col-span-4 glass-card p-6 sm:p-8 rounded-2xl flex flex-col justify-between border border-brand-500/20">
+                    <div>
+                        <h4 class="text-lg font-bold text-white dark:text-white light:text-slate-900 mb-2">
+                            Asset Package
+                        </h4>
+                        <p class="text-xs text-slate-400">Download the vector SVG brand assets for media coverage or collaboration.</p>
+                    </div>
+
+                    <div class="my-6 p-4 bg-slate-900/80 rounded-xl border border-slate-800 text-xs font-mono text-slate-300 space-y-1">
+                        <div>Format: SVG Vector</div>
+                        <div>Scalability: Lossless Infinite</div>
+                        <div>License: Personal & Brand Approved</div>
+                    </div>
+
+                    <button onclick="downloadSVG()" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white text-xs font-semibold tracking-wider uppercase hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-download"></i> Download Vector SVG
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 relative z-10 bg-slate-900/40 dark:bg-slate-900/40 light:bg-slate-100/60 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500 mb-2">Let's Connect</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white dark:text-white light:text-slate-900">Start a Conversation</h3>
+                <div class="w-16 h-1 bg-gradient-to-r from-brand-500 to-brand-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- Left Social Info Card -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="glass-card p-8 rounded-2xl space-y-6">
+                        <h4 class="text-xl font-bold text-white">Contact Details</h4>
+                        
+                        <div class="space-y-4 text-sm">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400 font-mono">Email Directly</div>
+                                    <a href="mailto:sainimukesh46753@gmail.com" class="font-medium text-white hover:text-brand-400 transition-colors">sainimukesh46753@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-400">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400 font-mono">Location</div>
+                                    <div class="font-medium text-white">Global Remote / Tech Hub</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Icon Links -->
+                        <div class="pt-6 border-t border-slate-800">
+                            <div class="text-xs font-mono text-slate-400 mb-4">SOCIAL NETWORK</div>
+                            <div class="flex gap-3">
+                                <a href="https://github.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://twitter.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-brands fa-x-twitter"></i>
+                                </a>
+                                <a href="https://dribbble.com" target="_blank" class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-300 hover:bg-brand-500 hover:text-white transition-all">
+                                    <i class="fa-brands fa-dribbble"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Form Input Card -->
+                <div class="lg:col-span-7 glass-card p-8 rounded-2xl">
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 mb-2">YOUR NAME *</label>
+                                <input type="text" required placeholder="e.g. Alex Morgan" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 mb-2">EMAIL ADDRESS *</label>
+                                <input type="email" required placeholder="alex@company.com" class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-slate-300 mb-2">PROJECT TYPE</label>
+                            <select class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-slate-300 focus:outline-none focus:border-brand-500 transition-colors text-sm">
+                                <option>Full-Stack Web Development</option>
+                                <option>Brand Identity & Logo Design</option>
+                                <option>UI/UX Design & Systems</option>
+                                <option>Technical Consulting</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-mono text-slate-300 mb-2">YOUR MESSAGE *</label>
+                            <textarea required rows="4" placeholder="Tell me about your project scope, goals, and timeline..." class="w-full px-4 py-3 rounded-xl bg-slate-900/80 border border-slate-700/80 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition-colors text-sm"></textarea>
+                        </div>
+
+                        <!-- Interactive Status Alert Box -->
+                        <div id="formStatus" class="hidden p-4 rounded-xl text-xs font-mono"></div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-brand-600 to-brand-accent text-white font-semibold text-xs tracking-wider uppercase hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-800/80 glass-card relative z-10 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8">
+                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                        <path d="M 40,20 L 75,20 L 75,90 L 125,20 L 165,20 L 105,100 L 175,180 L 130,180 L 75,110 L 75,180 L 40,180 Z" fill="#3b82f6"/>
+                        <circle cx="145" cy="55" r="8" fill="#06b6d4"/>
+                    </svg>
+                </div>
+                <span class="font-mono text-sm font-bold text-white">KARTIK SAINI</span>
+            </div>
+
+            <p class="text-xs text-slate-400 font-mono">
+                © <span id="currentYear"></span> KARTIK SAINI. All rights reserved. Built with precision.
+            </p>
+
+            <a href="#hero" class="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-white hover:bg-brand-500 transition-all">
+                <i class="fa-solid fa-arrow-up text-xs"></i>
+            </a>
+        </div>
+    </footer>
+
+    <div id="projectModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="glass-card max-w-2xl w-full rounded-2xl border border-white/20 overflow-hidden shadow-2xl relative animate-scaleUp">
+            <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-800/80 text-slate-300 hover:text-white flex items-center justify-center focus:outline-none">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="modalImage" src="" alt="Project Detailed View" class="w-full h-64 object-cover">
+            <div class="p-6 space-y-4">
+                <h3 id="modalTitle" class="text-2xl font-bold text-white">Project Title</h3>
+                <p id="modalDesc" class="text-sm text-slate-300 leading-relaxed">Detailed description will appear here...</p>
+                <div class="pt-4 border-t border-slate-800 flex justify-end">
+                    <button onclick="closeModal()" class="px-6 py-2 rounded-lg bg-brand-600 text-white text-xs font-semibold uppercase tracking-wider">
+                        Close Preview
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set dynamic year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Canvas Particle Background
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(96, 165, 250, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 18000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Theme Switcher Toggle Logic
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                themeIcon.className = 'fa-solid fa-sun text-lg text-amber-500';
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-moon text-lg text-amber-400';
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Project Filtering
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const btns = document.querySelectorAll('.filter-btn');
+
+            btns.forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.className = 'filter-btn active-filter px-5 py-2 text-xs font-semibold rounded-full border border-brand-500 bg-brand-500 text-white transition-all shadow-lg';
+                } else {
+                    btn.className = 'filter-btn px-5 py-2 text-xs font-semibold rounded-full border border-slate-700 bg-slate-800/60 text-slate-300 hover:border-brand-500/50 transition-all';
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Detail Modal Popups
+        function openModal(title, desc, imgSrc) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDesc').textContent = desc;
+            document.getElementById('modalImage').src = imgSrc;
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Contact Form Submission Validation Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const status = document.getElementById('formStatus');
+            status.className = 'p-4 rounded-xl text-xs font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30';
+            status.textContent = '✓ Thank you! Your message has been routed to Kartik Saini. Expect a response within 24 hours.';
+            status.classList.remove('hidden');
+            e.target.reset();
+        }
+
+        // Vector SVG Asset Download
+        function downloadSVG() {
+            const svgData = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="ksGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3b82f6"/>
+                        <stop offset="50%" stop-color="#06b6d4"/>
+                        <stop offset="100%" stop-color="#8b5cf6"/>
+                    </linearGradient>
+                </defs>
+                <path d="M 40,20 L 75,20 L 75,90 L 125,20 L 165,20 L 105,100 L 175,180 L 130,180 L 75,110 L 75,180 L 40,180 Z" fill="url(#ksGrad)"/>
+                <circle cx="145" cy="55" r="8" fill="#06b6d4"/>
+            </svg>`;
+            
+            const blob = new Blob([svgData], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Kartik_Saini_Brand_Logo.svg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
